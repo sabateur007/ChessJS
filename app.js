@@ -18,7 +18,7 @@ function createboard(){
         square.classList.add('square')                                                //div hold square class defined in stylesheet
         square.innerHTML = startpeice                                                 //setting peice info inside the square
         square.setAttribute('square-id',i)                                           //index of square
-        if(square.firstChild){square.setAttribute('draggable',true)}                 // if square has peice, set that draggable
+        square.setAttribute('draggable',true)                 // if square has peice, set that draggable
         const row =  Math.floor((63-i)/8+1)
         if(row%2 ===0){
             square.classList.add(i%2===0?"colorone":"colortwo")                        //coloring the chessboard
@@ -50,8 +50,9 @@ square.addEventListener('drop', dragDrop)
 let startpositionID
 let draggedelement
 
+
 function dragStart(e){
-     if(e.target.firstChild === null)
+      if(e.target.firstChild === null)
      e.preventDefault()
     else
     {
@@ -59,7 +60,10 @@ function dragStart(e){
         draggedelement =  e.target.firstChild
         // console.log(e.target)
         //console.log(draggedelement)
-    }
+        draggedelement.addEventListener('dragstart', dragStart)
+        draggedelement.addEventListener('dragover', dragOver)
+        draggedelement.addEventListener('drop', dragDrop)
+}
 }
 
 function dragOver(e){
@@ -67,7 +71,7 @@ function dragOver(e){
 
 }
 
-//hi
+
 
 function dragDrop(e){
     //console.log("evvventt"+ JSON.stringify(e.target))
@@ -76,11 +80,14 @@ function dragDrop(e){
     e.target.append(draggedelement)
     else
     {
-        console.log(e.target.parentElement)
-        sq =  e.target.parentElement.parentElement
-    sq.innerHTML= null
+        console.log(e.target)
+        sq = e.target.parentElement
+   sq.innerHTML= null
+
+   
     sq.append(draggedelement)
     }
+    
     //e.target.parentNode.append(draggedelement)
     
 }
