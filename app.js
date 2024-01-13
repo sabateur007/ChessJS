@@ -51,9 +51,15 @@ let startpositionID
 let draggedelement
 
 function dragStart(e){
+     if(e.target.firstChild === null)
+     e.preventDefault()
+    else
+    {
         startpositionID=  e.target.getAttribute('square-id')
         draggedelement =  e.target.firstChild
-        console.log(draggedelement)
+        // console.log(e.target)
+        //console.log(draggedelement)
+    }
 }
 
 function dragOver(e){
@@ -62,13 +68,16 @@ function dragOver(e){
 }
 
 function dragDrop(e){
+    //console.log("evvventt"+ JSON.stringify(e.target))
     e.stopPropagation()
     if(e.target.firstChild === null)
     e.target.append(draggedelement)
     else
     {
-    e.target.remove()
-    e.target.append(draggedelement)
+        console.log(e.target.parentElement)
+        sq =  e.target.parentElement.parentElement
+    sq.innerHTML= null
+    sq.append(draggedelement)
     }
     //e.target.parentNode.append(draggedelement)
     
