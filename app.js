@@ -67,6 +67,8 @@ function dragOver(e){
 
 }
 
+//hi
+
 function dragDrop(e){
     //console.log("evvventt"+ JSON.stringify(e.target))
     e.stopPropagation()
