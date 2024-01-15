@@ -38,7 +38,6 @@ function createboard(){
 createboard()
 
 const allSquares = document.querySelectorAll("#gameboard .square")
- console.log(allSquares)
 
 allSquares.forEach(square =>{
 square.addEventListener('dragstart', dragStart)
@@ -60,9 +59,10 @@ function dragStart(e){
         draggedelement =  e.target.firstChild
         // console.log(e.target)
         //console.log(draggedelement)
-        draggedelement.addEventListener('dragstart', dragStart)
-        draggedelement.addEventListener('dragover', dragOver)
-        draggedelement.addEventListener('drop', dragDrop)
+          legalMoves(draggedelement, startpositionID)
+        // draggedelement.addEventListener('dragstart', dragStart)
+        // draggedelement.addEventListener('dragover', dragOver)
+        // draggedelement.addEventListener('drop', dragDrop)
 }
 }
 
@@ -76,11 +76,12 @@ function dragOver(e){
 function dragDrop(e){
     //console.log("evvventt"+ JSON.stringify(e.target))
     e.stopPropagation()
+    
     if(e.target.firstChild === null)
     e.target.append(draggedelement)
     else
     {
-        console.log(e.target)
+          console.log(`drop place` + ` `+ e.target)
         sq = e.target.parentElement
    sq.innerHTML= null
 
@@ -90,4 +91,74 @@ function dragDrop(e){
     
     //e.target.parentNode.append(draggedelement)
     
+}
+
+function legalMoves(draggedelement, startpositionID)
+{
+    console.log(draggedelement)
+    typePeice = draggedelement.getAttribute("id")
+     if(typePeice === "rook")
+     {
+        rookmoves(startpositionID)
+     }
+     if(typePeice === "king")
+     {
+        kingmoves(startpositionID)
+     }
+     if(typePeice === "queen")
+     {
+        queenmoves(startpositionID)
+     }
+     if(typePeice === "bishop")
+     {
+        bishopmoves(startpositionID)
+     }
+     if(typePeice === "knight")
+     {
+        knightmoves(startpositionID)
+     }
+     if(typePeice === "pawn")
+     {
+        pawnmoves(startpositionID)
+     }
+
+}
+
+ function rookmoves(startpositionID)
+{
+    console.log("start postion is" + startpositionID)
+     console.log("the rook has moved")
+     let row = (startpositionID+1)/8
+     let colm = (startpositionID)%8
+     
+}
+
+function kingmoves(startpositionID)
+{
+    console.log("start postion is" + startpositionID)
+     console.log("the king has moved")
+}
+
+function queenmoves(startpositionID)
+{
+    console.log("start postion is" + startpositionID)
+    console.log("the queen has moved")
+}
+
+function bishopmoves(startpositionID)
+{
+    console.log("start postion is" + startpositionID)
+     console.log("the bishop has moved")
+}
+
+function knightmoves(startpositionID)
+{
+    console.log("start postion is" + startpositionID)
+     console.log("the knight has moved")
+}
+
+function pawnmoves(startpositionID)
+{
+    console.log("start postion is" + startpositionID)
+     console.log("the pawn has moved")
 }
