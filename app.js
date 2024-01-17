@@ -1,6 +1,9 @@
 const gameboard = document.querySelector("#gameboard")
 const playerDisplay =  document.querySelector("#player")
 document.querySelector("#info-dispaly")
+const width = 8
+let playergo = 'black'
+
 
 const startpeices = [
 rook, knight, bishop, queen, king, bishop, knight, rook,
@@ -47,6 +50,7 @@ square.addEventListener('drop', dragDrop)
 
 
 let startpositionID
+let endpositionID
 let draggedelement
 
 
@@ -76,7 +80,8 @@ function dragOver(e){
 function dragDrop(e){
     //console.log("evvventt"+ JSON.stringify(e.target))
     e.stopPropagation()
-    
+    endpositionID = e.target.getAttribute("square-id")
+    console.log("drop position is "+ endpositionID)
     if(e.target.firstChild === null)
     e.target.append(draggedelement)
     else
@@ -124,12 +129,26 @@ function legalMoves(draggedelement, startpositionID)
 
 }
 
+function convertIndextoRowColumn()
+{
+    let st = Number(startpositionID)
+    
+    let et = Number(endpositionID)
+    let endrow = Math.floor(et/8)
+    let endcolm = endpositionID%8
+    let startrow = Math.floor(st/8)
+    let startcolm = startpositionID%8
+    console.log("start row number "+ startrow)
+    console.log("start column number "+ startcolm)
+    console.log("end row number "+ endrow)
+    console.log("end column number "+ endcolm)
+}
+
  function rookmoves(startpositionID)
 {
     console.log("start postion is" + startpositionID)
      console.log("the rook has moved")
-     let row = (startpositionID+1)/8
-     let colm = (startpositionID)%8
+     convertIndextoRowColumn()
      
 }
 
